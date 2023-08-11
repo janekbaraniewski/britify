@@ -1,0 +1,11 @@
+# Compiled files
+target/
+Cargo.lock
+
+# IDE-specific files
+.idea/
+*.iml
+
+# Other common ignores
+.DS_Store
+.env
