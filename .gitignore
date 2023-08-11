@@ -9,3 +9,5 @@ Cargo.lock
 # Other common ignores
 .DS_Store
 .env
+
+.cargo/
