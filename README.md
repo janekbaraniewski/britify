@@ -1,67 +1,67 @@
 # britify - words all chav, bruv, just how you like 'em, innit
 
-Innit time to spice up your words a bit, mate? With britify, you can take any ol' text and turn it as British as you like. Whether you're after slang or something a tad posh, we've got you covered, innit?
+Fancy a natter in proper Brit style? With britify, you can transmogrify any ol' blurb and turn it as British as a full English, what say?
 
-## Features
+## Tally-Ho Features
 
-- **Slang Style:** Get words all chav, bruv, just how you like 'em, innit.
-- **Formal Style:** For them posh occasions, like.
-- **Custom Styles:** Fancy something a bit different, mate? Go on, then!
+- **Slang Mode:** Get words all chav, squire, just how you're inclined, innit?
+- **Posh Mode:** For highfalutin toffs, like.
+- **Bespoke Modes:** Hankering for a peculiar twist, eh? Be my guest!
 
-## Getting Started
+## Kick-off Guide
 
-Here's how you can get started with britify, mate:
+Here's how to get cracking with britify, guv:
 
 ### Installation
 
-Install it with a swig of brew, bruv:
+Pop this in your brew, chum:
 
-```bash
+\`\`\`bash
 brew install britify
-```
+\`\`\`
 
-### Usage
+### How to Use
 
-You can britify your text with these simple commands, innit:
+You can britify your gab with these simple tricks, innit:
 
 **Slang Style:**
 
-```bash
-britify 'Your text goes 'ere, mate' --style slang
-```
+\`\`\`bash
+britify 'Put yer phrase 'ere, squire' --style slang
+\`\`\`
 
-**Formal Style:**
+**Posh Style:**
 
-```bash
-britify 'For when you're feeling all fancy, like' --style formal
-```
+\`\`\`bash
+britify 'For when you're feeling like a toff, like' --style formal
+\`\`\`
 
-**Custom Style:**
+**Bespoke Style:**
 
-```bash
-britify 'Craft it how you like, bruv' --style custom
-```
+\`\`\`bash
+britify 'Craft it how you fancy, guv' --style custom
+\`\`\`
 
-**From a Text File:**
+**From a Scroll:**
 
-```bash
+\`\`\`bash
 cat <text file path> | britify
-```
+\`\`\`
 
-## Contributing
+## Throw in Your Two Pence
 
-Wanna chip in, mate? Check out our [CONTRIBUTING.md](CONTRIBUTING.md) to see how you can make britify even more smashing.
+Fancy a bit of collaboration, old chap? Peek at [CONTRIBUTING.md](CONTRIBUTING.md) to see how to make britify even more tickety-boo.
 
 ## License
 
-This project's all opensource, innit. Check out the [LICENSE.md](LICENSE.md) file for more info.
+This bit's all opensource, guv. Gander at the [LICENSE.md](LICENSE.md) parchment for the nitty-gritty.
 
-## Need a Hand?
+## Baffled?
 
-Got stuck, did ya? No worries, just drop us a line at [support@britify.com](mailto:support@britify.com), and we'll sort you out.
+In a pickle? No sweat, just drop us a line at [support@britify.com](mailto:support@britify.com), and we'll sort you straightaway.
 
-## Bottom Line
+## The Last Word
 
-britify's written in Python and is here to turn your text all British-like, however you fancy. Give it a whirl, and you'll be chatting like a Londoner in no time, bruv.
+britify's penned in Python and turns your text all British, however you're inclined. Give it a whirl, and you'll be gabbing like a London cabbie in no time, guv.
 
-Happy britifying!
+Cheerio, and happy britifying!
