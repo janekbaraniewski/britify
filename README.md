@@ -1,5 +1,7 @@
 # britify - words all chav, bruv, just how you like 'em, innit
 
+DISCLAIMER - all of the code and text in this repo is a result of conversation with gpt4, I wrote none of it. I donn't even understand 90% od the stuff thats here
+
 Fancy a natter in proper Brit style, do you? Well, put on your bowler hat and grab your brolly, because with britify, you can transmogrify any ol' blurb into something as British as a full English or a cuppa with Her Majesty!
 
 ## Tally-Ho Features
