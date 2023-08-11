@@ -10,7 +10,7 @@ use async_openai::{
     Client,
 };
 
-pub async fn translate(text: &str, style: Style) -> Result<String, Box<dyn Error>> {
+pub async fn translate(text: &str, style: Style, model: &str) -> Result<String, Box<dyn Error>> {
     // Your translation logic goes here
     // Depending on the style, apply the transformation
     // Return the translated text
@@ -20,7 +20,7 @@ pub async fn translate(text: &str, style: Style) -> Result<String, Box<dyn Error
 
     let request = CreateChatCompletionRequestArgs::default()
         .max_tokens(512u16)
-        .model("gpt-3.5-turbo")
+        .model(model) // Use the model parameter here
         .messages([
             ChatCompletionRequestMessageArgs::default()
                 .role(Role::System)

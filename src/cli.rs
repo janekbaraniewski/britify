@@ -32,6 +32,14 @@ pub async fn run() {
                 .takes_value(true)
                 .default_value("slang"), // Default to slang if no style specified
         )
+        .arg(
+            Arg::with_name("model")
+                .short("m")
+                .long("model")
+                .help("Sets the model: gpt-4, <other-model>")
+                .takes_value(true)
+                .default_value("gpt-4"), // Default to gpt-4 if no model specified
+        )
         .get_matches();
 
     let text = if let Some(input_text) = matches.value_of("TEXT") {
@@ -43,11 +51,13 @@ pub async fn run() {
         buffer
     };
 
-    // Retrieve the style from the command-line arguments
     let style_str = matches.value_of("style").unwrap_or("slang");
     let style = from_str(style_str);
 
-    let result = translate(&text, style).await;
+    // Retrieve the model from the command-line arguments
+    let model = matches.value_of("model").unwrap_or("gpt-4");
+
+    let result = translate(&text, style, model).await;
     match result {
         Ok(translated_text) => println!("{}", translated_text),
         Err(error) => println!("An error occurred: {:?}", error),
