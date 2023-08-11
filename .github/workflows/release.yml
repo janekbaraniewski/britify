@@ -17,6 +17,7 @@ jobs:
         with:
           fetch-depth: 0
 
+      # Install Rust toolchain
       - name: Install Rust
         uses: actions-rs/toolchain@v1
         with:
@@ -24,9 +25,22 @@ jobs:
           toolchain: stable
           override: true
 
-      - name: Build Release
-        run: cargo build --release
+      # Cross-compilation setup for different platforms
+      - name: Install cross-compilation dependencies
+        run: rustup target add x86_64-unknown-linux-gnu aarch64-unknown-linux-gnu x86_64-apple-darwin aarch64-apple-darwin
 
+      # Build for each target and rename the binaries
+      - name: Build and Rename Binaries
+        run: |
+          VERSION=$(echo ${{ github.ref }} | cut -d'/' -f3)
+          for TARGET in x86_64-unknown-linux-gnu aarch64-unknown-linux-gnu x86_64-apple-darwin aarch64-apple-darwin; do
+            OS=$(echo $TARGET | cut -d'-' -f2)
+            ARCH=$(echo $TARGET | cut -d'-' -f1)
+            cargo build --release --target $TARGET
+            mv target/$TARGET/release/britify target/$TARGET/release/britify-$OS-$ARCH-$VERSION
+          done
+
+      # Create GitHub release
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -36,13 +50,23 @@ jobs:
           draft: false
           prerelease: false
 
-      - name: Upload Release Asset
-        uses: actions/upload-release-asset@v1
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./target/release/britify
-          asset_name: britify
-          asset_content_type: application/octet-stream
+      # Upload binaries as release assets
+      - name: Upload Release Assets
+        run: |
+          for TARGET in x86_64-unknown-linux-gnu aarch64-unknown-linux-gnu x86_64-apple-darwin aarch64-apple-darwin; do
+            OS=$(echo $TARGET | cut -d'-' -f2)
+            ARCH=$(echo $TARGET | cut -d'-' -f1)
+            VERSION=$(echo ${{ github.ref }} | cut -d'/' -f3)
+            BIN_NAME=britify-$OS-$ARCH-$VERSION
+            uses: actions/upload-release-asset@v1
+            with:
+              upload_url: ${{ steps.create_release.outputs.upload_url }}
+              asset_path: ./target/$TARGET/release/$BIN_NAME
+              asset_name: $BIN_NAME
+              asset_content_type: application/octet-stream
+          done
+
+      # rest of your steps...
 
       - name: Configure Git user
         run: |
