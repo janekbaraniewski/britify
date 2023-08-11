@@ -46,7 +46,7 @@ jobs:
 
       - name: Configure Git user
         run: |
-          git config --global user.email "bot@britify.co"
+          git config --global user.email "robot@britify.io"
           git config --global user.name "britify-bot"
 
 
