@@ -18,7 +18,7 @@ Pop this in your brew, chum:
 
 ```bash
 brew install janekbaraniewski/janekbaraniewski/britify
-\```
+```
 
 ### How to Use
 
