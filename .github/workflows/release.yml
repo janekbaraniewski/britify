@@ -43,3 +43,19 @@ jobs:
           asset_path: ./target/release/britify
           asset_name: britify
           asset_content_type: application/octet-stream
+
+      - name: Checkout Tap Repository
+        uses: actions/checkout@v2
+        with:
+          repository: janekbaraniewski/homebrew-janekbaraniewski
+          path: homebrew-janekbaraniewski
+
+      - name: Update Homebrew Formula
+        run: |
+          cd homebrew-janekbaraniewski/Formula
+          sed -i "s|url .*|url \"https://github.com/janekbaraniewski/britify/releases/download/${{ github.ref }}/britify\"|" britify.rb
+          sha256=$(shasum -a 256 ../../target/release/britify | cut -f1 -d' ')
+          sed -i "s|sha256 .*|sha256 \"$sha256\"|" britify.rb
+          git add britify.rb
+          git commit -m "Update britify to ${{ github.ref }}"
+          git push
