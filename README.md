@@ -1,4 +1,4 @@
-# britify: Turn Yer Words All British-like, Bruv
+# britify - words all chav, bruv, just how you like 'em, innit
 
 Innit time to spice up your words a bit, mate? With britify, you can take any ol' text and turn it as British as you like. Whether you're after slang or something a tad posh, we've got you covered, innit?
 
