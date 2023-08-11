@@ -1,20 +1,20 @@
 # britify - words all chav, bruv, just how you like 'em, innit
 
-Fancy a natter in proper Brit style? With britify, you can transmogrify any ol' blurb and turn it as British as a full English, what say?
+Fancy a natter in proper Brit style, do you? Well, put on your bowler hat and grab your brolly, because with britify, you can transmogrify any ol' blurb into something as British as a full English or a cuppa with Her Majesty!
 
 ## Tally-Ho Features
 
-- **Slang Mode:** Get words all chav, squire, just how you're inclined, innit?
-- **Posh Mode:** For highfalutin toffs, like.
-- **Scottish Mode:** Aye, laddie, pass me tha' whisky, and let's do some writin', eh?
+- **Slang Mode:** Oi, bruv! Get words all chav, just how you like 'em. You'll be the talk of the East End, squire, innit?
+- **Posh Mode:** Feeling aristocratic, are we? Then adopt the language of the upper crust, and make Lord Grantham proud. Splendid!
+- **Scottish Mode:** Aye, laddie! Let's get some tartan in your text and turn your words as Scottish as a haggis in the Highlands.
 
 ## Kick-off Guide
 
-Here's how to get cracking with britify, guv:
+Here's how to get cracking with britify, guv. It's easier than making a cup of tea on a rainy afternoon:
 
 ### Installation
 
-Pop this in your brew, chum:
+Pop this in your brew, chum, and watch the magic happen:
 
 ```bash
 brew install janekbaraniewski/janekbaraniewski/britify
@@ -22,7 +22,7 @@ brew install janekbaraniewski/janekbaraniewski/britify
 
 ### How to Use
 
-You can britify your gab with these simple tricks, innit:
+You can britify your gab with these simple tricks. Bob's your uncle!
 
 **Slang Style:**
 
@@ -33,13 +33,13 @@ britify 'Put yer phrase 'ere, squire'
 **Posh Style:**
 
 ```bash
-britify 'For when you're feeling like a toff, like' --style formal
+britify 'For when you're feeling like a proper toff, like' --style formal
 ```
 
 **Scottish Style:**
 
 ```bash
-britify 'Craft it how you fancy, guv' --style scottish
+britify 'Pour some whisky, lassie, and let's write!' --style scottish
 ```
 
 **From a Scroll:**
@@ -50,18 +50,18 @@ cat <text file path> | britify
 
 ## Throw in Your Two Pence
 
-Wanna have a go, eh? Sorry, old bean, but all the code in this repo is penned by GPT-4, so there's no room for extra scribblers.
+Dreaming of adding your posh prose or cheeky chit-chat? Sorry, old bean, but all the code in this repository is penned by the mighty GPT-4. It's like having a Shakespearean quill for the digital age, no extra scribblers needed!
 
 ## License
 
-This bit's all opensource, guv. Gander at the [LICENSE.md](LICENSE.md) parchment for the nitty-gritty.
+This bit's all opensource, guv. No tricks up our sleeves. Gander at the [LICENSE.md](LICENSE.md) parchment for the nitty-gritty, legal mumbo jumbo.
 
 ## Baffled?
 
-In a pickle? No sweat, just drop a line in the [issues section](https://github.com/janekbaraniewski/britify/issues), and we'll sort you straightaway, guv.
+In a pickle? Stuck like a London bus in traffic? No sweat, just drop a line in the [issues section](https://github.com/janekbaraniewski/britify/issues), and we'll sort you out faster than you can say "Fish and chips!"
 
 ## The Last Word
 
-britify's penned in Rust and turns your text all British, however you're inclined. Give it a whirl, and you'll be gabbing like a London cabbie in no time, guv.
+britify's penned in Rust and will turn your text all British, however you're inclined. From Buckingham Palace to the pubs of Glasgow, you'll be gabbing like a native in no time. Give it a whirl, and make your words as British as a red phone box in the rain.
 
-Cheerio, and happy britifying!
+Cheerio, and happy britifying, guv!
