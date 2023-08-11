@@ -21,22 +21,31 @@ pub async fn run() {
         .arg(
             Arg::with_name("TEXT")
                 .help("Input text to transform")
-                .index(1) // This makes it a positional argument
+                .index(1)
                 .required(false),
+        )
+        .arg(
+            Arg::with_name("style")
+                .short("s")
+                .long("style")
+                .help("Sets the style: slang, formal, scottish")
+                .takes_value(true)
+                .default_value("slang"), // Default to slang if no style specified
         )
         .get_matches();
 
     let text = if let Some(input_text) = matches.value_of("TEXT") {
         input_text.to_string()
     } else {
-        // Read from stdin if no text is provided as an argument
         use std::io::{self, Read};
         let mut buffer = String::new();
         io::stdin().read_to_string(&mut buffer).expect("Failed to read from stdin");
         buffer
     };
 
-    let style = Style::Slang; // You can modify this based on your needs
+    // Retrieve the style from the command-line arguments
+    let style_str = matches.value_of("style").unwrap_or("slang");
+    let style = from_str(style_str);
 
     let result = translate(&text, style).await;
     match result {
