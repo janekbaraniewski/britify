@@ -1,9 +1,13 @@
+/// Representin' th' various British styles for text transformation, aye.
 pub enum Style {
-    Slang,
-    Formal,
-    Scottish,
+    Slang,    // Londoner slang style, innit?
+    Formal,   // Royal British formal style, if ye please.
+    Scottish, // Scottish bar style, laddie.
 }
 
+/// Gettin' th' prompt based on th' selected style, aye.
+///
+/// This prompt helps in translatin' th' text accordin' tae th' chosen style, by th' bonnie banks.
 pub fn get_prompt(style: &Style) -> String {
     let common_goal = "Your mission as a text transformation agent is to output to the user the same message they wrote, just in a totally different style.";
     let common_output_config = "Output only and ONLY the content of the user's initial message after applying the defined style.";

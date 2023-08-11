@@ -2,7 +2,8 @@ use std::env;
 use std::process::Command;
 
 fn main() {
-    // Try to fetch the latest Git tag
+    // Let's try tae fetch th' latest Git tag, shall we?
+    // It'll gie us th' current version o' th' code, or "0.0.0" if somethin's amiss.
     let output = Command::new("git")
         .args(&["describe", "--tags"])
         .output()
@@ -12,6 +13,6 @@ fn main() {
 
     let version = output.trim();
 
-    // Print the version information for Cargo to pick up
+    // Print th' version information, laddie, sae Cargo can pick it up.
     println!("cargo:rustc-env=VERSION={}", version);
 }
