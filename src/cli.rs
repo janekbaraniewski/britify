@@ -1,8 +1,10 @@
 use clap::{App, Arg};
 
 pub fn run() {
+    let version = env!("VERSION");
     let matches = App::new("Britify")
-        .version("0.1.0")
+        .version(version)
+        .author("https://baraniew.ski/")
         .author("Your Name")
         .about("Transforms text into British styles")
         .arg(
