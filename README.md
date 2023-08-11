@@ -6,7 +6,7 @@ Fancy a natter in proper Brit style? With britify, you can transmogrify any ol' 
 
 - **Slang Mode:** Get words all chav, squire, just how you're inclined, innit?
 - **Posh Mode:** For highfalutin toffs, like.
-- **Bespoke Modes:** Hankering for a peculiar twist, eh? Be my guest!
+- **Scottish Mode:** Aye, laddie, pass me tha' whisky, and let's do some writin', eh?
 
 ## Kick-off Guide
 
@@ -16,9 +16,9 @@ Here's how to get cracking with britify, guv:
 
 Pop this in your brew, chum:
 
-\`\`\`bash
-brew install britify
-\`\`\`
+```bash
+brew install janekbaraniewski/janekbaraniewski/britify
+\```
 
 ### How to Use
 
@@ -26,31 +26,31 @@ You can britify your gab with these simple tricks, innit:
 
 **Slang Style:**
 
-\`\`\`bash
-britify 'Put yer phrase 'ere, squire' --style slang
-\`\`\`
+```bash
+britify 'Put yer phrase 'ere, squire'
+```
 
 **Posh Style:**
 
-\`\`\`bash
+```bash
 britify 'For when you're feeling like a toff, like' --style formal
-\`\`\`
+```
 
-**Bespoke Style:**
+**Scottish Style:**
 
-\`\`\`bash
-britify 'Craft it how you fancy, guv' --style custom
-\`\`\`
+```bash
+britify 'Craft it how you fancy, guv' --style scottish
+```
 
 **From a Scroll:**
 
-\`\`\`bash
+```bash
 cat <text file path> | britify
-\`\`\`
+```
 
 ## Throw in Your Two Pence
 
-Fancy a bit of collaboration, old chap? Peek at [CONTRIBUTING.md](CONTRIBUTING.md) to see how to make britify even more tickety-boo.
+Wanna have a go, eh? Sorry, old bean, but all the code in this repo is penned by GPT-4, so there's no room for extra scribblers.
 
 ## License
 
@@ -58,10 +58,10 @@ This bit's all opensource, guv. Gander at the [LICENSE.md](LICENSE.md) parchment
 
 ## Baffled?
 
-In a pickle? No sweat, just drop us a line at [support@britify.com](mailto:support@britify.com), and we'll sort you straightaway.
+In a pickle? No sweat, just drop a line in the [issues section](https://github.com/janekbaraniewski/britify/issues), and we'll sort you straightaway, guv.
 
 ## The Last Word
 
-britify's penned in Python and turns your text all British, however you're inclined. Give it a whirl, and you'll be gabbing like a London cabbie in no time, guv.
+britify's penned in Rust and turns your text all British, however you're inclined. Give it a whirl, and you'll be gabbing like a London cabbie in no time, guv.
 
 Cheerio, and happy britifying!
