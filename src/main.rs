@@ -1,5 +1,9 @@
 mod cli;
+mod translator;
+mod styles;
 
-fn main() {
-    cli::run();
+#[tokio::main]
+async fn main() {
+    // assuming run is in a module called cli
+    cli::run().await;
 }

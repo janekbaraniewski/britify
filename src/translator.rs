@@ -1,37 +1,46 @@
+use std::error::Error;
+use crate::styles::{Style, get_prompt};
+
 use async_openai::{
-    types::{CreateImageRequestArgs, ImageSize, ResponseFormat},
+    types::{
+        ChatCompletionRequestMessageArgs,
+        CreateChatCompletionRequestArgs,
+        Role,
+    },
     Client,
 };
-use std::error::Error;
 
-#[tokio::main]
-async fn main() -> Result<(), Box<dyn Error>> {
-    // create client, reads OPENAI_API_KEY environment variable for API key.
-    let client = Client::new();
-
-    let request = CreateImageRequestArgs::default()
-        .prompt("cats on sofa and carpet in living room")
-        .n(2)
-        .response_format(ResponseFormat::Url)
-        .size(ImageSize::S256x256)
-        .user("async-openai")
-        .build()?;
-
-    let response = client.images().create(request).await?;
-
-    // Download and save images to ./data directory.
-    // Each url is downloaded and saved in dedicated Tokio task.
-    // Directory is created if it doesn't exist.
-    let paths = response.save("./data").await?;
-
-    paths
-        .iter()
-        .for_each(|path| println!("Image file path: {}", path.display()));
-
-    Ok(())
-}
-pub fn translate(text: &str, style: &str) -> String {
+pub async fn translate(text: &str, style: Style) -> Result<String, Box<dyn Error>> {
     // Your translation logic goes here
     // Depending on the style, apply the transformation
     // Return the translated text
+    let client = Client::new();
+
+    let system_message = get_prompt(&style);
+
+    let request = CreateChatCompletionRequestArgs::default()
+        .max_tokens(512u16)
+        .model("gpt-3.5-turbo")
+        .messages([
+            ChatCompletionRequestMessageArgs::default()
+                .role(Role::System)
+                .content(system_message)
+                .build()?,
+            ChatCompletionRequestMessageArgs::default()
+                .role(Role::User)
+                .content("User Message: ".to_owned() + text)
+                .build()?,
+        ])
+        .build()?;
+
+    let response = client.chat().create(request).await?;
+
+    // Check if a response was received and extract the content
+    let translated_text = response
+        .choices
+        .get(0)
+        .and_then(|choice| choice.message.content.clone())
+        .unwrap_or_else(|| "No response received".to_string());
+
+    Ok(translated_text) // Return the translated text as a String
 }

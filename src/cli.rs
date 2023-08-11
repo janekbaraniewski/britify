@@ -1,6 +1,17 @@
 use clap::{App, Arg};
+use crate::styles::Style;
 
-pub fn run() {
+use crate::translator::translate;
+
+pub fn from_str(style: &str) -> Style {
+    match style.to_lowercase().as_str() {
+        "formal" => Style::Formal,
+        "scottish" => Style::Scottish,
+        _ => Style::Slang, // Default to slang if no match
+    }
+}
+
+pub async fn run() {
     let version = env!("VERSION");
     let matches = App::new("Britify")
         .version(version)
@@ -10,44 +21,26 @@ pub fn run() {
         .arg(
             Arg::with_name("TEXT")
                 .help("Input text to transform")
+                .index(1) // This makes it a positional argument
                 .required(false),
-        )
-        .arg(
-            Arg::with_name("style")
-                .short("s")
-                .long("style")
-                .help("Sets the style: slang, formal, scottish")
-                .takes_value(true),
         )
         .get_matches();
 
-    if matches.value_of("TEXT").is_none() {
-        App::new("Britify")
-            .version("0.1.0")
-            .author("https://baraniew.ski/")
-            .about("Transform yer text intae Scottish, laddie! Britify tak's yer words an' turns 'em intae somethin' pure bonnie. Choose frae slang, formal, or Scottish styles, an' watch as yer text is reborn!")
-            .arg(
-                Arg::with_name("TEXT")
-                    .help("Input text to transform")
-                    .required(false),
-            )
-            .arg(
-                Arg::with_name("style")
-                    .short("s")
-                    .long("style")
-                    .help("Sets the style: slang, formal, scottish")
-                    .takes_value(true),
-            )
-            .print_help()
-            .unwrap();
-        println!(); // Print a newline after the help message
-        return;
+    let text = if let Some(input_text) = matches.value_of("TEXT") {
+        input_text.to_string()
+    } else {
+        // Read from stdin if no text is provided as an argument
+        use std::io::{self, Read};
+        let mut buffer = String::new();
+        io::stdin().read_to_string(&mut buffer).expect("Failed to read from stdin");
+        buffer
+    };
+
+    let style = Style::Slang; // You can modify this based on your needs
+
+    let result = translate(&text, style).await;
+    match result {
+        Ok(translated_text) => println!("{}", translated_text),
+        Err(error) => println!("An error occurred: {:?}", error),
     }
-
-    let text = matches.value_of("TEXT").unwrap();
-    let style = matches.value_of("style").unwrap_or("slang");
-
-    // Call your translation function here, e.g.
-    // let result = translator::translate(text, style);
-    // println!("{}", result);
 }
