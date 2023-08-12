@@ -1,4 +1,5 @@
 /// Representin' th' various British styles for text transformation, aye.
+#[derive(PartialEq, Debug)]
 pub enum Style {
     Slang,    // Londoner slang style, innit?
     Formal,   // Royal British formal style, if ye please.

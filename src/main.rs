@@ -1,6 +1,6 @@
-mod cli;
-mod translator;
-mod styles;
+pub mod cli;
+pub mod translator;
+pub mod styles;
 
 /// Oi, 'ere's where the magic happens, squire!
 /// Starts up that britify machine, it does.

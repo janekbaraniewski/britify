@@ -1,6 +1,9 @@
 use std::error::Error;
 use crate::styles::{Style, get_prompt};
 
+#[cfg(test)]
+use mockall::*;
+
 use async_openai::{
     types::{
         ChatCompletionRequestMessageArgs,
@@ -9,6 +12,7 @@ use async_openai::{
     },
     Client,
 };
+
 
 /// Translatin' a given text tae a specific British style usin' th' given model, aye.
 ///
@@ -58,4 +62,44 @@ pub async fn translate(text: &str, style: Style, model: &str) -> Result<String, 
 
     // Return th' translated text or an error if somethin's amiss.
     Ok(translated_text)
+}
+
+
+
+#[cfg_attr(test, mockall::automock)]
+pub trait TranslatorClient {
+    fn translate(&self, text: &str, style: Style, model: &str) -> Result<String, Box<dyn Error>>;
+}
+
+pub struct RealTranslatorClient;
+impl TranslatorClient for RealTranslatorClient {
+    fn translate(&self, text: &str, style: Style, model: &str) -> Result<String, Box<dyn Error>> {
+        // Here, I'm returning an error as we don't have the actual implementation.
+        // Replace this with your actual implementation.
+        Err(Box::new(std::io::Error::new(std::io::ErrorKind::Other, "Not implemented")))
+    }
+}
+
+
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use mockall::predicate::*;
+
+    #[tokio::test]
+    async fn test_translate() {
+        let mut mock_translator_client = MockTranslatorClient::new();
+        mock_translator_client
+            .expect_translate()
+            .with(eq("Hello"), eq(Style::Slang), eq("gpt-4"))
+            .return_once(|_, _, _| Ok("Oi, bruv! Hello, innit?".to_string()));
+
+        let text = "Hello";
+        let style = Style::Slang;
+        let model = "gpt-4";
+        let translated_text = mock_translator_client.translate(&text, style, model).unwrap();
+
+        assert_eq!(translated_text, "Oi, bruv! Hello, innit?");
+    }
 }
