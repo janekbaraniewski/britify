@@ -1,15 +1,8 @@
 use std::error::Error;
 use crate::styles::{Style, get_prompt};
 
-#[cfg(test)]
-use mockall::*;
-
 use async_openai::{
-    types::{
-        ChatCompletionRequestMessageArgs,
-        CreateChatCompletionRequestArgs,
-        Role,
-    },
+    types::{ ChatCompletionRequestMessageArgs, CreateChatCompletionRequestArgs, Role},
     Client,
 };
 
@@ -65,27 +58,24 @@ pub async fn translate(text: &str, style: Style, model: &str) -> Result<String, 
 }
 
 
-
-#[cfg_attr(test, mockall::automock)]
-pub trait TranslatorClient {
-    fn translate(&self, text: &str, style: Style, model: &str) -> Result<String, Box<dyn Error>>;
-}
-
-pub struct RealTranslatorClient;
-impl TranslatorClient for RealTranslatorClient {
-    fn translate(&self, text: &str, style: Style, model: &str) -> Result<String, Box<dyn Error>> {
-        // Here, I'm returning an error as we don't have the actual implementation.
-        // Replace this with your actual implementation.
-        Err(Box::new(std::io::Error::new(std::io::ErrorKind::Other, "Not implemented")))
-    }
-}
-
-
-
 #[cfg(test)]
 mod tests {
     use super::*;
     use mockall::predicate::*;
+
+    #[cfg_attr(test, mockall::automock)]
+    pub trait TranslatorClient {
+        fn translate(&self, text: &str, style: Style, model: &str) -> Result<String, Box<dyn Error>>;
+    }
+
+    pub struct RealTranslatorClient;
+    impl TranslatorClient for RealTranslatorClient {
+        fn translate(&self, text: &str, style: Style, model: &str) -> Result<String, Box<dyn Error>> {
+            // Here, I'm returning an error as we don't have the actual implementation.
+            // Replace this with your actual implementation.
+            Err(Box::new(std::io::Error::new(std::io::ErrorKind::Other, "Not implemented")))
+        }
+    }
 
     #[tokio::test]
     async fn test_translate() {
