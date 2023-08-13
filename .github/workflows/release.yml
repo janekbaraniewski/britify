@@ -37,30 +37,33 @@ jobs:
           echo '#!/bin/bash' > aarch64-pkg-config
           echo 'PKG_CONFIG_PATH=/usr/lib/aarch64-linux-gnu/pkgconfig pkg-config "$@"' >> aarch64-pkg-config
           chmod +x aarch64-pkg-config
+          - name: Install AArch64 dependencies
+          run: |
+            sudo apt-get update
+            sudo apt-get install -y gcc-aarch64-linux-gnu g++-aarch64-linux-gnu
+            sudo apt-get install -y libssl-dev:arm64
 
-      - name: Install AArch64 dependencies
+      - name: Setup pkg-config for AArch64
         run: |
-          sudo apt-get update
-          sudo apt-get install -y gcc-aarch64-linux-gnu g++-aarch64-linux-gnu
-          sudo apt-get install -y pkg-config-aarch64-linux-gnu
-          sudo apt-get install -y libssl-dev:arm64
+          sudo apt-get install pkg-config
+          echo 'aarch64-linux-gnu-gcc' > aarch64-linux-gnu-pkg-config
+          echo 'PKG_CONFIG_LIBDIR=/usr/lib/aarch64-linux-gnu/pkgconfig:/usr/share/pkgconfig' >> aarch64-linux-gnu-pkg-config
+          echo 'PKG_CONFIG_PATH=/usr/lib/aarch64-linux-gnu/pkgconfig' >> aarch64-linux-gnu-pkg-config
+          echo 'pkg-config "$@"' >> aarch64-linux-gnu-pkg-config
+          chmod +x aarch64-linux-gnu-pkg-config
+          sudo mv aarch64-linux-gnu-pkg-config /usr/local/bin
 
       - name: Configure OpenSSL for AArch64
         run: |
-          mkdir openssl_aarch64
-          cd openssl_aarch64
-          OPENSSL_DIR=/usr/lib/aarch64-linux-gnu
-          export PKG_CONFIG_PATH=$OPENSSL_DIR/pkgconfig
-          export LD_LIBRARY_PATH=$OPENSSL_DIR
+          export OPENSSL_DIR=/usr/lib/aarch64-linux-gnu
           export PKG_CONFIG_ALLOW_CROSS=1
-          export PKG_CONFIG_ALL_STATIC=1
-          export OPENSSL_STATIC=1
 
           echo "CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER=aarch64-linux-gnu-gcc" >> $GITHUB_ENV
           echo "CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_AR=aarch64-linux-gnu-ar" >> $GITHUB_ENV
           echo "OPENSSL_DIR=$OPENSSL_DIR" >> $GITHUB_ENV
-          echo "PKG_CONFIG_PATH=$PKG_CONFIG_PATH" >> $GITHUB_ENV
           echo "PKG_CONFIG_ALLOW_CROSS=1" >> $GITHUB_ENV
+          echo "PKG_CONFIG=aarch64-linux-gnu-pkg-config" >> $GITHUB_ENV
+
 
       - name: Set up cross-compilation environment
         run: |
