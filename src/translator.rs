@@ -1,5 +1,5 @@
 use std::error::Error;
-use crate::styles::{Style, get_prompt};
+use crate::styles::{Style, get_prompt, get_texts};
 
 use async_openai::{
     types::{ ChatCompletionRequestMessageArgs, CreateChatCompletionRequestArgs, Role},
@@ -24,8 +24,10 @@ pub async fn translate(text: &str, style: Style, model: &str) -> Result<String, 
     // Let's get tae work, shall we? First, create a client.
     let client = Client::new();
 
+    let text_eaxmples = get_texts()?;
+
     // Fetch th' system message based on th' style, aye.
-    let system_message = get_prompt(&style);
+    let system_message = get_prompt(&style, &text_eaxmples);
 
     // Craft th' request wi' th' proper model an' messages, ken.
     let request = CreateChatCompletionRequestArgs::default()
