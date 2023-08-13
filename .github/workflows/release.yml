@@ -24,10 +24,11 @@ jobs:
           profile: minimal
           toolchain: stable
           override: true
-
-      # Cross-compilation setup for different platforms
       - name: Install cross-compilation dependencies
-        run: rustup target add x86_64-unknown-linux-gnu aarch64-unknown-linux-gnu x86_64-apple-darwin aarch64-apple-darwin
+        run: |
+          rustup target add x86_64-unknown-linux-gnu aarch64-unknown-linux-gnu x86_64-apple-darwin aarch64-apple-darwin
+          sudo apt-get update
+          sudo apt-get install -y gcc-aarch64-linux-gnu g++-aarch64-linux-gnu
 
       # Build for each target and rename the binaries
       - name: Build and Rename Binaries
